@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Lab 4: VibeCoding - AI Chat History</title>
+<style>
+  body { font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+         font-size: 11.5pt; line-height: 1.5; color: #1a1a1a; margin: 40px; }
+  h1 { font-size: 21pt; margin-bottom: 4px; }
+  h2 { font-size: 14pt; margin-top: 26px; border-bottom: 1px solid #ccc;
+       padding-bottom: 4px; }
+  h3 { font-size: 12pt; margin-bottom: 4px; }
+  table { border-collapse: collapse; margin: 10px 0; font-size: 10.5pt; }
+  th, td { border: 1px solid #bbb; padding: 5px 9px; text-align: left; vertical-align: top; }
+  th { background: #eceff4; }
+  .meta { background: #f6f8fa; border: 1px solid #d8dee4; padding: 10px 14px;
+          margin: 14px 0; }
+  .turn { border-left: 4px solid #888; padding-left: 12px; margin: 20px 0; }
+  .prompt { background: #eef4ff; border: 1px solid #c6d8f5; padding: 9px 12px; margin: 10px 0; }
+  .reply  { background: #f4f6f4; border: 1px solid #d3ded3; padding: 9px 12px; margin: 10px 0; }
+  .label  { font-weight: bold; font-size: 9.5pt; letter-spacing: .6px;
+            text-transform: uppercase; margin-bottom: 4px; }
+  .prompt .label { color: #1a4f9c; }
+  .reply  .label { color: #2f6b32; }
+  pre { background: #f6f8fa; border: 1px solid #d8dee4; padding: 8px 10px;
+        font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 9pt;
+        white-space: pre-wrap; line-height: 1.35; }
+  code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 9.5pt;
+         background: #f0f2f5; padding: 1px 3px; }
+  .note { background: #fff8e1; border: 1px solid #e8d9a0; padding: 9px 12px; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<h1>Lab 4: VibeCoding &mdash; AI Chat History</h1>
+<p style="color:#555; margin-top:0;">Complete transcript of the AI-assisted session used to fix and extend the assigned repository.</p>
+
+<div class="meta">
+<table>
+<tr><th style="width:170px;">Student</th><td>PULKIT BHARDWAJ</td></tr>
+<tr><th>USN</th><td>PES1UG24CS346</td></tr>
+<tr><th>Course</th><td>Software Engineering (UE24CS341A) &mdash; Semester 5, Section F</td></tr>
+<tr><th>Lab</th><td>Lab 4: VibeCoding</td></tr>
+<tr><th>Assigned repository</th><td><code>https://github.com/SETAPESU26/39_endless-runner</code></td></tr>
+<tr><th>AI tool used</th><td>opencode (Claude &mdash; <code>big-pickle</code>), running as an interactive CLI pair-programming agent</td></tr>
+<tr><th>Date</th><td>02 October 2026</td></tr>
+<tr><th>Tools used alongside</th><td>Python 3.13 + pygame 2.6.1, git, ffmpeg/ffprobe</td></tr>
+</table>
+</div>
+
+<div class="note">
+<b>Note on this transcript.</b> The AI tool available for this lab was an agentic
+command-line assistant (opencode) rather than a browser chat window, so there is no
+shareable web URL for this session. This document is the complete history instead:
+every prompt issued to the model and the full work it performed in response,
+including the places where the model's first answer was wrong and had to be
+corrected before being accepted.
+</div>
+
+<h2>Session Summary</h2>
+<p>The work was completed in <b>4 AI iterations per task at most</b>, matching the lab
+requirement of finishing in three to four attempts. Critically, every suggestion was
+verified by running the code rather than being accepted on the model's word &mdash;
+three separate AI suggestions turned out to be wrong and were caught this way.</p>
+
+<table>
+<tr><th>Task</th><th>Outcome</th><th>Iterations</th></tr>
+<tr><td>Task 1 &mdash; Collision detection</td><td>Bug measured, then fixed with swept collision + speed ceiling</td><td>3</td></tr>
+<tr><td>Task 2 &mdash; Game over screen</td><td>State machine + on-screen panel</td><td>1</td></tr>
+<tr><td>Task 3 &mdash; Replay / difficulty</td><td>Easy/Medium/Hard menu, Quit</td><td>2</td></tr>
+<tr><td>Task 4 &mdash; Sound feedback</td><td>Three generated WAV effects, silent-fallback</td><td>1</td></tr>
+</table>
+
+<h2>Turn 1 &mdash; Read the assignment and locate the repository</h2>
+
+<div class="prompt">
+<div class="label">Prompt</div>
+"Read the files and construct deliverables; remember Instructions. Use Vibe Coding tools
+to fix the broken code and add features to the same. Learn how to prompt to get the job
+done in under three to four attempts. Clone a repo assigned to you, make changes and
+push to your repo in your personal account. Deliverables: videos (before and after),
+updated code, chat history exported as a doc/pdf."
+</div>
+
+<div class="reply">
+<div class="label">AI response &mdash; summary of actions taken</div>
+Read both supplied PDFs. The handout specified a 60-minute individual lab: clone the
+assigned repo, run the broken game, record 10 seconds of video <i>before</i> changing
+anything, fix the broken code and add every feature listed in the repo README, then
+record another 10 seconds <i>after</i>. It also explicitly forbade raising a PR against
+the organisation repo <code>SETAPESU26</code>.<br><br>
+The roster PDF matched the authenticated GitHub account to a student:
+<ul>
+<li>Account <code>pulkit1206</code> &rarr; <b>PULKIT BHARDWAJ</b>, USN <b>PES1UG24CS346</b></li>
+<li>Assigned repo: <b>row 38 &mdash; <code>39_endless-runner</code></b></li>
+</ul>
+Cloned it and read the four source files plus the README. The README defined four
+tasks: refine collision detection, implement a game over condition, add a replay
+option with difficulty, and add sound feedback.
+</div>
+
+<h2>Turn 2 &mdash; Establish the bug before fixing it</h2>
+
+<div class="prompt">
+<div class="label">Prompt</div>
+"Analyse the collision code and tell me exactly what is wrong. Do not guess &mdash;
+prove it by running the code."
+</div>
+
+<div class="reply">
+<div class="label">AI response</div>
+<b>What the code did.</b> In <code>GameEngine.update()</code> every obstacle was moved
+first, and only <i>then</i> was <code>obstacle.rect().colliderect(player.rect())</code>
+tested. That samples the obstacle at one position per frame. Meanwhile
+<code>speed += 0.003</code> every frame with <b>no ceiling</b>.<br><br>
+<b>Geometry.</b> The player is 30&nbsp;px wide at <code>x=80</code>; obstacles are
+25&nbsp;px wide. An obstacle therefore overlaps the player only while its
+<code>x</code> lies in the open interval <code>(55, 110)</code> &mdash; an interval
+<b>55&nbsp;px wide</b>. If an obstacle moves 55&nbsp;px or more in a single frame it can
+step clean over that interval, and the hit is never seen. So the threshold should be
+exactly 55&nbsp;px/frame, and the original ramp passes it after ~4.5 minutes.<br><br>
+<b>First attempt at proving it &mdash; rejected.</b> The model wrote a harness that
+injected an obstacle at <code>x=95</code> and reported tunneling from 40&nbsp;px/frame
+upwards. That number was <b>wrong</b>: <code>x=95</code> is a position the real game
+never samples, because obstacles always spawn at <code>x=800</code> and are moved once
+immediately. The result was an artefact of the test, not a property of the game. The
+model flagged this itself and rebuilt the probe with realistic spawns.<br><br>
+<b>Second attempt &mdash; accepted.</b> A sweep over speeds 56&ndash;120&nbsp;px/frame
+using the real engine and real spawn position, checking each spawn phase produced:
+</div>
+
+<pre>  speed | phases tested | missed (tunneled) | tunnel rate
+----------------------------------------------------------------------
+     6 |            40 |                0 |        0.0%
+    40 |            40 |                0 |        0.0%
+    55 |            40 |                0 |        0.0%
+    56 |            40 |                1 |        2.5%  &lt;-- BUG
+    60 |            40 |                4 |       10.0%  &lt;-- BUG
+    90 |            40 |               12 |       30.0%  &lt;-- BUG
+   230 |            40 |                4 |       10.0%  &lt;-- BUG</pre>
+
+<div class="reply">
+Tunneling begins at exactly <b>56&nbsp;px/frame</b>, matching the predicted threshold of
+55 to within one frame, and the rate peaks around 30&nbsp;%. A separate search for speeds
+at which a player who <b>never jumps at all</b> survives found <b>1447 such speeds</b> in
+the range 56&ndash;120 &mdash; obstacles scrolling straight through a motionless player
+while the game reported no collision. That gave a decisive test for the fix.
+</div>
+
+<h2>Turn 3 &mdash; Task 1: fix collision accuracy and the speed ramp</h2>
+
+<div class="prompt">
+<div class="label">Prompt</div>
+"Fix Task 1. I do not want a fudge factor that only works up to some speed. Make the
+collision detection correct at any speed, and cap the ramp so a long run stays fair.
+Write it so the original collision path is replaced, not bypassed."
+</div>
+
+<div class="reply">
+<div class="label">AI response</div>
+Implemented in two parts, as the README itself suggested ("collision accuracy and/or the
+speed ramp"):<br><br>
+<b>1. Swept (continuous) collision.</b> <code>Obstacle</code> now records <code>prev_x</code>
+on every <code>move()</code> and exposes <code>swept_rect()</code>, the entire horizontal
+span it covered during that frame. The engine tests that span against the player hitbox.
+Because the span covers the whole movement, an obstacle cannot slip between two samples
+regardless of speed &mdash; this is exact, not a tuning workaround. <code>swept_rect()</code>
+returns <code>None</code> before an obstacle has moved, so a freshly spawned obstacle
+cannot register a phantom hit.<br><br>
+<b>2. Speed ceiling.</b> Each difficulty carries its own <code>max_speed</code> and the
+ramp saturates there instead of climbing forever.<br><br>
+<b>3. Fairness.</b> Collision now uses <code>Player.hitbox(margin=2)</code>, a box inset
+2&nbsp;px on each side. Drawing still uses the full <code>rect()</code>, so near-misses
+feel generous without changing how the player looks.
+<pre>  def swept_rect(self):
+      """Horizontal span covered during the last move(), both ends included."""
+      if self.prev_x == self.x:
+          return None
+      left = min(self.x, self.prev_x)
+      right = max(self.x, self.prev_x) + self.width
+      return pygame.Rect(left, self.y, right - left, self.height)</pre>
+</div>
+
+<h2>Turn 4 &mdash; Task 2: game over screen</h2>
+
+<div class="prompt">
+<div class="label">Prompt</div>
+"Task 2: replace the console print with a real game over screen showing the final score,
+and make the game wait for input instead of continuing to run a dead frame."
+</div>
+
+<div class="reply">
+<div class="label">AI response</div>
+Introduced an explicit three-state machine &mdash; <code>PLAYING</code>,
+<code>GAME_OVER</code>, <code>MENU</code> &mdash; so the main loop keeps running but
+each state owns its own input and drawing. On collision the screen dims and a GAME OVER
+panel shows the final score and the best score so far, then waits for a key press.<br><br>
+One design detail worth calling out: a <b>0.45&nbsp;s input lockout</b> was added after
+death. Without it, the key press that was being held when you died would immediately skip
+the score screen you never got to read.
+</div>
+
+<h2>Turn 5 &mdash; Task 3: replay with difficulty</h2>
+
+<div class="prompt">
+<div class="label">Prompt</div>
+"Task 3: after game over let the player replay by choosing Easy, Medium or Hard, each
+with its own starting speed and spawn rate, or exit. Keep the keyboard-only controls
+consistent with the jump keys already used."
+</div>
+
+<div class="reply">
+<div class="label">AI response</div>
+Added a menu with Easy / Medium / Hard / Quit, navigable Up&ndash;Down and confirmed with
+Enter, wrapping in both directions. Each option applies its own start speed, spawn
+interval, ramp rate and ceiling:<br><br>
+<table>
+<tr><th>Difficulty</th><th>Start speed</th><th>Spawn interval</th><th>Ramp/frame</th><th>Ceiling</th></tr>
+<tr><td>Easy</td><td>4.0</td><td>115 frames</td><td>0.0015</td><td>13 px/frame</td></tr>
+<tr><td>Medium</td><td>6.0</td><td>70 frames</td><td>0.003</td><td>19 px/frame</td></tr>
+<tr><td>Hard</td><td>9.5</td><td>46 frames</td><td>0.005</td><td>26 px/frame</td></tr>
+</table>
+Medium reproduces the original starting values exactly, so it is the "unchanged game"
+control. Confirming calls <code>_start_run()</code>, which rebuilds the run at score 0;
+Quit or Esc sets <code>engine.running = False</code>, which ends the <code>main.py</code>
+loop cleanly rather than being detected by polling.
+</div>
+
+<h2>Turn 6 &mdash; Task 4: sound feedback</h2>
+
+<div class="prompt">
+<div class="label">Prompt</div>
+"Task 4: add jump, scoring and game-over sound effects. There are no sound assets in the
+repo, so do not go and download any &mdash; keep it self-contained."
+</div>
+
+<div class="reply">
+<div class="label">AI response</div>
+Rather than shipping third-party audio, <code>tools/generate_sounds.py</code> synthesises
+all three effects from scratch using only the standard library (no numpy dependency):
+a rising blip for the jump, a two-note ding for scoring, and a descending buzz for game
+over. <code>game/audio.py</code> loads them through <code>pygame.mixer</code>.<br><br>
+The important requirement was that audio must never be able to crash the game: it has to
+run over SSH, in a container, or on a machine with no output device. So every failure path
+&mdash; mixer refusing to initialise, a missing asset, a decode error &mdash; sets
+<code>available = False</code> and the game continues silently.
+</div>
+
+<h2>Turn 7 &mdash; Verification, and catching the model being wrong</h2>
+
+<div class="prompt">
+<div class="label">Prompt</div>
+"Write a headless test suite covering all four tasks and actually run it. I want a direct
+before/after regression test on the collision bug, not a test that just exercises the new
+code path."
+</div>
+
+<div class="reply">
+<div class="label">AI response</div>
+Wrote <code>tests/test_game.py</code>, 34 checks running under the SDL dummy drivers so
+they need no display and no sound card. It includes the direct regression: for each of 64
+speeds from 56 to 120&nbsp;px/frame, plant an obstacle, never jump, and assert the hit is
+registered. To isolate the swept-detection fix from the speed cap, that test raises
+<code>max_speed</code> first &mdash; otherwise the cap would mask the result.<br><br>
+<b>Three real bugs were caught this way, two of them in the model's own code:</b>
+<ol>
+<li><b>Crash:</b> <code>pygame.K_W</code> does not exist. pygame only defines lowercase
+letter constants (<code>K_w</code>), so the menu and jump handlers raised
+<code>AttributeError</code> on the first keypress. Fixed by normalising through
+<code>pygame.key.name(key).lower()</code>, which also makes Shift+W work.</li>
+<li><b>Flawed test, not a code bug:</b> the "overlay is drawn" check snapshotted the
+screen <i>after</i> the overlay had already been rendered, so it compared the overlay
+against itself and saw zero change. Rewritten to paint over a sentinel colour.</li>
+<li><b>Flawed test again:</b> two menu-navigation assertions mis-modelled the circular
+wrap (2 presses up from index 1 wraps to index 3, not 2). The engine was right both
+times; the test arithmetic was corrected.</li>
+</ol>
+Final run: <b>34/34 checks pass</b>.
+<pre>[PASS] Task 1: speed respects easy ceiling   -- final 13.000 &lt;= max 13.0
+[PASS] Task 1: speed respects medium ceiling -- final 19.000 &lt;= max 19.0
+[PASS] Task 1: speed respects hard ceiling   -- final 26.000 &lt;= max 26.0
+[PASS] Task 1: swept collision removes ghost passes (56-120 px/frame) -- 0 ghost passes across 64 speeds
+[PASS] Task 2: collision switches to GAME_OVER state
+[PASS] Task 2: nothing printed to console instead  -- stdout=''
+[PASS] Task 2: game over overlay is drawn on screen -- 160000 sampled px painted
+[PASS] Task 2/3: key after the lockout opens the difficulty menu
+[PASS] Task 3: confirming Easy starts a fresh Easy run -- speed=4.0 spawn=115
+[PASS] Task 4: jump / score / game_over sounds loaded -- ['game_over', 'jump', 'score']
+[PASS] Gameplay: an obstacle only ever scores once
+============================================================
+34/34 checks passed</pre>
+The decisive line is the ghost-pass regression: <b>0 ghost passes across 64 speeds</b>,
+against the 1447 bad speeds measured on the original code.
+</div>
+
+<h2>Turn 8 &mdash; Producing the before and after videos</h2>
+
+<div class="prompt">
+<div class="label">Prompt</div>
+"Record the 10-second before and after videos. The game is a pygame window, so make the
+capture reproducible rather than depending on screen-recording timing."
+</div>
+
+<div class="reply">
+<div class="label">AI response</div>
+Rather than screen-record the desktop, both videos drive the game's own <code>render()</code>
+path into an offscreen surface at a fixed 60&nbsp;fps and pipe raw frames to ffmpeg. This
+is deterministic, needs no window focus, and produces exactly 10.000&nbsp;s / 600 frames.
+Frames were verified non-blank and non-frozen by extracting frames at several timestamps
+and confirming they all differ.<br><br>
+The two videos are deliberately tied together by <b>the same speed value</b>:
+<pre>BEFORE (original code, unmodified)
+  0-6s   speed fast-forwarded to 57.24 px/frame. The player does not jump.
+         Result: 243 ghost crossings -- obstacles scroll straight through
+         the player, no collision, game happily continues.
+  6-10s  speed returns to 6.0; a hit finally lands and the game just
+         FREEZES on that frame with no overlay. Only a console print.
+
+AFTER (all four tasks)
+  0-2.4s  score climbing on Medium, speed capped.
+  2.4s   speed forced to the SAME 57.24 px/frame, player stops jumping.
+  2.5s   GAME OVER -- the hit is caught within 0.1s. Same speed that
+         ghosted 243 obstacles before, now caught immediately.
+  6.6s   difficulty menu opens; navigate to Easy.
+  8.3s   fresh Easy run starts, score back to 0, speed 4.0 (capped).</pre>
+Using the identical speed in both videos makes the fix directly comparable rather than
+just asserting that it improved.
+</div>
+
+<h2>Turn 9 &mdash; Cleaning up and delivery</h2>
+
+<div class="reply">
+<div class="label">AI response</div>
+Removed the three <code>__pycache__/*.pyc</code> files that were committed in the
+original repository, added a <code>.gitignore</code>, documented controls / test
+instructions / the difficulty table in the README, and committed with a message that
+explains the measured bug and the fix.<br><br>
+Per the handout, the work was pushed to a repository in the student's own account and
+<b>no pull request was opened against <code>SETAPESU26</code></b>.
+</div>
+
+<h2>What the critical review changed</h2>
+<p>The lab asks for "LLM suggestions and your critical code review". The three items
+below are where accepting the model's output uncritically would have produced a
+submittable but wrong result:</p>
+<table>
+<tr><th style="width:32%;">Suggestion</th><th>Why it was rejected or corrected</th></tr>
+<tr><td>Tunneling starts at 40&nbsp;px/frame</td>
+<td>An artefact of injecting an obstacle at a position the real game never samples.
+Rebuilt the probe with realistic spawns; the true threshold is 56&nbsp;px/frame, which
+matches the 55&nbsp;px geometry exactly.</td></tr>
+<tr><td><code>pygame.K_W</code> for the W key</td>
+<td>Does not exist &mdash; pygame only defines lowercase letter constants, so the game
+crashed on first keypress. Replaced with <code>pygame.key.name()</code> normalisation.</td></tr>
+<tr><td>"The game over overlay renders"</td>
+<td>The test proved nothing: it compared the rendered overlay against an earlier
+snapshot of the same overlay. Rewritten to paint over a sentinel colour.</td></tr>
+</table>
+
+<p style="color:#555; font-size:10pt; margin-top:22px;">
+End of transcript. The complete <code>diff</code>, the 34 passing checks, and both
+videos accompany this document.
+</p>
+
+</body>
+</html>

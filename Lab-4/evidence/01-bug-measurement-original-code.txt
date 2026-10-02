@@ -1,0 +1,31 @@
+================================================================
+EVIDENCE A - Task 1 bug measured on the ORIGINAL code
+Repository: SETAPESU26/39_endless-runner @ 5e73071 (unmodified)
+Generated: 2026-10-02 11:54 IST
+================================================================
+
+==========================================================================
+TASK 1 - realistic tunneling probe (real spawn at x=800, real engine)
+==========================================================================
+ speed | phases tested | missed (tunneled) | tunnel rate
+--------------------------------------------------------------------------
+     6 |            40 |                0 |        0.0%
+    20 |            40 |                0 |        0.0%
+    40 |            40 |                0 |        0.0%
+    55 |            40 |                0 |        0.0%
+    56 |            40 |                1 |        2.5%  <-- BUG
+    60 |            40 |                4 |       10.0%  <-- BUG
+    70 |            40 |                9 |       22.5%  <-- BUG
+    90 |            40 |               12 |       30.0%  <-- BUG
+   120 |            40 |                8 |       20.0%  <-- BUG
+   180 |            40 |                6 |       15.0%  <-- BUG
+   230 |            40 |                4 |       10.0%  <-- BUG
+--------------------------------------------------------------------------
+Reading: 'missed' = the obstacle physically crossed the player's hitbox
+while the player was grounded, yet engine.game_over never became True.
+
+Speed ramp of the ORIGINAL code: speed = 6 + 0.003 * frame
+  reaches  55 px/frame after ~  272s of play
+  reaches 120 px/frame after ~  633s of play
+  reaches 230 px/frame after ~ 1244s of play
+==========================================================================

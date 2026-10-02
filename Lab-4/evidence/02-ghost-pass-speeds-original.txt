@@ -1,0 +1,54 @@
+================================================================
+EVIDENCE B - speeds at which a NEVER-JUMPING player survives
+Repository: SETAPESU26/39_endless-runner @ 5e73071 (unmodified)
+Generated: 2026-10-02 11:54 IST
+================================================================
+
+The player stands perfectly still and never presses a key.
+If the game still does not end, obstacles have passed straight
+through the player's hitbox without registering a collision.
+
+speeds where a NEVER-JUMPING player is not killed (ghost passes):
+  speed   57.24 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.25 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.26 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.27 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.28 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.29 -> obstacle crossed the hitbox 1x, game_over = False
+  speed    57.3 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.31 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.32 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.33 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.34 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.35 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.36 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.37 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.38 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.39 -> obstacle crossed the hitbox 1x, game_over = False
+  speed    57.4 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.41 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.42 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.43 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.44 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.45 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.46 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.47 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.48 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   57.49 -> obstacle crossed the hitbox 1x, game_over = False
+  speed    57.5 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.01 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.02 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.03 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.04 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.05 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.06 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.07 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.08 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.09 -> obstacle crossed the hitbox 1x, game_over = False
+  speed    62.1 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.11 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.12 -> obstacle crossed the hitbox 1x, game_over = False
+  speed   62.13 -> obstacle crossed the hitbox 1x, game_over = False
+
+total such speeds in [56,120): 1447
+example to use in the 'before' video: speed 57.24

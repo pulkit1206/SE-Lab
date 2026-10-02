@@ -1,0 +1,50 @@
+================================================================
+EVIDENCE C - test suite on the FIXED code
+Command: python tests/test_game.py
+Generated: 2026-10-02 11:54 IST
+================================================================
+
+34 headless checks covering all four tasks. The key regression is:
+the 64 speeds from 56 to 120 px/frame that let a motionless player
+survive in the original code must now all register a hit.
+
+[PASS] Task 1: speed respects easy ceiling  -- final 13.000 <= max 13.0
+[PASS] Task 1: speed respects medium ceiling  -- final 19.000 <= max 19.0
+[PASS] Task 1: speed respects hard ceiling  -- final 26.000 <= max 26.0
+[PASS] Task 1: swept_rect is None before first move
+[PASS] Task 1: swept_rect spans whole travelled width  -- span [740, 825]
+[PASS] Task 1: swept collision removes ghost passes (56-120 px/frame)  -- 0 ghost passes across 64 speeds
+[PASS] Task 1: ordinary grounded collision is detected  -- state=game_over
+[PASS] Task 2: collision switches to GAME_OVER state  -- state=game_over
+[PASS] Task 2: nothing printed to console instead  -- stdout=''
+[PASS] Task 2: game over overlay is drawn on screen  -- 160000 sampled px painted over a blank screen
+[PASS] Task 2: final score is retained  -- score=0
+[PASS] Task 2: input during the lockout does not skip the score screen  -- state=game_over
+[PASS] Task 2/3: key after the lockout opens the difficulty menu  -- state=menu
+[PASS] Task 3: menu opens
+[PASS] Task 3: menu preselects the current difficulty  -- idx=1
+[PASS] Task 3: Up moves the selection  -- idx=0
+[PASS] Task 3: Down moves the selection  -- idx=1
+[PASS] Task 3: selection wraps past the top to the Quit row  -- idx=3 (expected 3)
+[PASS] Task 3: Down from the Quit row wraps back to the top (Easy)  -- idx=0 (expected 0)
+[PASS] Task 3: confirming Easy starts a fresh Easy run  -- state=playing difficulty=easy speed=4.0 spawn=115
+[PASS] Task 3: easy preset applies start speed / spawn rate / cap  -- speed=4.0 spawn=115 cap=13.0
+[PASS] Task 3: medium preset applies start speed / spawn rate / cap  -- speed=6.0 spawn=70 cap=19.0
+[PASS] Task 3: hard preset applies start speed / spawn rate / cap  -- speed=9.5 spawn=46 cap=26.0
+[PASS] Task 3: Quit stops the main loop  -- running=False
+[PASS] Task 3: Escape quits from the menu
+[PASS] Task 4: audio manager initialises without raising  -- mixer ready
+[PASS] Task 4: jump / score / game_over sounds loaded  -- loaded=['game_over', 'jump', 'score']
+[PASS] Task 4: play() is safe to call
+[PASS] Task 4: wav assets present and non-empty  -- {'jump': 10628, 'score': 19448, 'game_over': 48554}
+[PASS] Gameplay: Space makes the player jump
+[PASS] Gameplay: gravity returns the player to the ground
+[PASS] Gameplay: clearing an obstacle scores a point  -- score=1 state=playing
+[PASS] Gameplay: an obstacle only ever scores once  -- score=1
+[PASS] Render: playing / game over / menu all draw cleanly
+
+============================================================
+34/34 checks passed
+============================================================
+
+Exit status: 0 (all checks passed)
