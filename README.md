@@ -13,5 +13,4 @@ All labs use the same scenario &mdash; **Problem #39, Second-Hand Product Escrow
 
 **PULKIT BHARDWAJ** &mdash; `PES1UG24CS346`
 
-Each lab folder has its own `README.md` describing the deliverables. Start with
-[`Lab-4/README.md`](Lab-4/README.md) for the full Lab 4 write-up, bug analysis and verification results.
+Each lab folder has its own `README.md` describing the deliverables.
